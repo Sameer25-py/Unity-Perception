@@ -9,7 +9,15 @@ namespace CustomRandomizations
     // Add this Component to any GameObject that you would like to be randomized. This class must have an identical name to
 // the .cs file it is defined in.
     [RequireComponent(typeof(Light))]
-    public class LightRandomizerTagCustom : RandomizerTag {}
+    public class LightRandomizerTagCustom : RandomizerTag
+    {
+        public float MinIntensity,MaxIntensity;
+
+        public void SetIntensity(float rawIntensity)
+        {
+            GetComponent<Light>().intensity =  rawIntensity * (MaxIntensity - MinIntensity) + MinIntensity;
+        }
+    }
 
     [Serializable]
     [AddRandomizerMenu("Light Randomizer")]
@@ -27,7 +35,7 @@ namespace CustomRandomizations
             foreach (var tag in tags)
                 if(tag.TryGetComponent(out Light light))
                 {
-                    light.intensity = LightIntensity.Sample();
+                    tag.SetIntensity(LightIntensity.Sample());
                     light.color = RGBColor.Sample();
                 }
         }
