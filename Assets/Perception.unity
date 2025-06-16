@@ -384,17 +384,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consumerEndpoint:
-    rid: 6656509737293840389
+    rid: 6656509737293840431
   accumulationSettings:
     rid: 6656509737293840390
   references:
     version: 2
     RefIds:
-    - rid: 6656509737293840389
-      type: {class: SoloEndpoint, ns: UnityEngine.Perception.GroundTruth.Consumers,
-        asm: Unity.Perception.Runtime}
-      data:
-        soloDatasetName: solo
     - rid: 6656509737293840390
       type: {class: AccumulationSettings, ns: UnityEngine.Perception.Settings, asm: Unity.Perception.Runtime}
       data:
@@ -403,6 +398,12 @@ MonoBehaviour:
         shutterFullyOpen: 0
         shutterBeginsClosing: 1
         adaptFixedLengthScenarioFrames: 1
+    - rid: 6656509737293840431
+      type: {class: PerceptionEndpoint, ns: UnityEngine.Perception.GroundTruth.Consumers,
+        asm: Unity.Perception.Runtime}
+      data:
+        capturesPerFile: 150
+        metricsPerFile: 150
 --- !u!4 &605647999
 Transform:
   m_ObjectHideFlags: 3
@@ -900,7 +901,7 @@ MonoBehaviour:
       type: {class: LightRandomizer, ns: CustomRandomizations, asm: Assembly-CSharp}
       data:
         m_Enabled: 1
-        collapsed: 0
+        collapsed: 1
         <enabledStateCanBeSwitchedByUser>k__BackingField: 1
         LightIntensity:
           collapsed: 0
@@ -1084,6 +1085,8 @@ MonoBehaviour:
   - rid: 6656509737293840386
   - rid: 6656509737293840387
   - rid: 6656509737293840388
+  - rid: 6656509737293840426
+  - rid: 6656509737293840430
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1137,6 +1140,22 @@ MonoBehaviour:
         enabled: 1
         annotationId: semantic segmentation
         labelConfig: {fileID: 11400000, guid: 37614e11f7f694ec3ab113e05d99458e, type: 2}
+    - rid: 6656509737293840426
+      type: {class: InstanceSegmentationLabeler, ns: UnityEngine.Perception.GroundTruth.Labelers,
+        asm: Unity.Perception.Runtime}
+      data:
+        enabled: 1
+        annotationId: instance segmentation
+        idLabelConfig: {fileID: 11400000, guid: b294242d480684b4e8a86957ae08ea39,
+          type: 2}
+    - rid: 6656509737293840430
+      type: {class: InstanceSegmentationLabeler, ns: UnityEngine.Perception.GroundTruth.Labelers,
+        asm: Unity.Perception.Runtime}
+      data:
+        enabled: 1
+        annotationId: instance segmentation
+        idLabelConfig: {fileID: 11400000, guid: b294242d480684b4e8a86957ae08ea39,
+          type: 2}
 --- !u!114 &1662064263
 MonoBehaviour:
   m_ObjectHideFlags: 0
