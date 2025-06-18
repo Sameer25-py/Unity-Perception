@@ -26,8 +26,14 @@ namespace CustomRandomizations
             y = new UniformSampler(-1f, 1f),
             z = new ConstantSampler(2f)
         };
-
+        /// <summary>
+        /// Gap b/w cars
+        /// </summary>
         public FloatParameter Gap;
+        /// <summary>
+        /// No of placement tries per car
+        /// </summary>
+        public ConstantSampler Tries;
         /// <summary>
         /// The sampler controlling the number of objects to place.
         /// </summary>
@@ -66,7 +72,7 @@ namespace CustomRandomizations
                 var instance = m_GameObjectOneWayCache.GetOrInstantiate(prefabs.Sample());
                 if (instance.TryGetComponent(out Collider col))
                 {
-                    for (int j = 0; j < 20; j++)
+                    for (int j = 0; j < Tries.Sample(); j++)
                     {   
                         var sampledPosition = positionDistribution.Sample();
                         var colliders = Physics.OverlapBox(sampledPosition, 
