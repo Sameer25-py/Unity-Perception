@@ -6,6 +6,7 @@ using UnityEngine.Perception.Randomization.Parameters;
 using UnityEngine.Perception.Randomization.Randomizers;
 using UnityEngine.Perception.Randomization.Samplers;
 using Object = UnityEngine.Object;
+using Random = System.Random;
 
 namespace CustomRandomizations
 {
@@ -13,8 +14,8 @@ namespace CustomRandomizations
     /// Creates a 2D layer of evenly spaced GameObjects from a given list of prefabs
     /// </summary>
     [Serializable]
-    [AddRandomizerMenu("Car Placement Randomizer")]
-    public class CarPlacementRandomizer : Randomizer
+    [AddRandomizerMenu("Vechicle Placement Randomizer")]
+    public class VehiclePlacementRandomizer : Randomizer
     {
         /// <summary>
         /// The Samplers used to place objects in 3D space. Defaults to a uniform distribution in x, normal distribution
@@ -53,9 +54,6 @@ namespace CustomRandomizations
         GameObject m_Container;
         //This cache allows objects to be reused across placements
         UnityEngine.Perception.Randomization.Utilities.GameObjectOneWayCache m_GameObjectOneWayCache;
-        
-        public LayerMask SimulationLayerMask;
-        private List<GameObject> _iObjects = new() ;
 
         /// <inheritdoc/>
         protected override void OnAwake()
@@ -73,23 +71,18 @@ namespace CustomRandomizations
         {
             var count = objectCount.Sample();
             for (int i = 0; i < count; i++)
-            {
+            {   
                 var instance = m_GameObjectOneWayCache.GetOrInstantiate(prefabs.Sample());
-                if (instance.TryGetComponent(out Collider col))
+                for (int j = 0; j < Tries.Sample(); j++)
                 {
-                    for (int j = 0; j < Tries.Sample(); j++)
-                    {   
-                        var sampledPosition = positionDistribution.Sample();
-                        var sampledRotation = RotationDistribution.Sample();
-                        var colliders = Physics.OverlapBox(sampledPosition, 
-                            col.bounds.extents + Vector3.one * Gap.Sample(),Quaternion.Euler(sampledRotation),SimulationLayerMask);
-                        if (colliders.Length != 0) continue;
-                        var obj = Object.Instantiate(instance,sampledPosition, Quaternion.Euler(sampledRotation));
-                        _iObjects.Add(obj);
+                    var sampledPosition = positionDistribution.Sample();
+                    var sampledRotation = RotationDistribution.Sample();
+                    instance.transform.position = Vector3.right * 100000;
+                    var vehicleTag = instance.GetComponent<VehicleRandomPlacementTag>();
+                    bool isSuccess = vehicleTag.Place(sampledPosition, sampledRotation, Gap.Sample() * Vector3.one);
+                    if(isSuccess)
                         break;
-                    }
                 }
-                
             }
         }
 
@@ -99,9 +92,6 @@ namespace CustomRandomizations
         protected override void OnIterationEnd()
         {
             m_GameObjectOneWayCache.ResetAllObjects();
-            _iObjects.ForEach(Object.Destroy);
-            _iObjects.Clear();
-            
         }
     }
 }

@@ -93,6 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1880317207959290724}
   - component: {fileID: -7443385230422457048}
+  - component: {fileID: -8623902738013231373}
+  - component: {fileID: 382805527985322301}
   m_Layer: 0
   m_Name: Free Racing Car
   m_TagString: Untagged
@@ -131,6 +133,43 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8623902738013231373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248598967819147742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bf766ef84040d39bcd0ed8bffba1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minMaxRotationY: {x: -360, y: 360}
+  yPos: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  colliders: []
+--- !u!114 &382805527985322301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248598967819147742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b33f0bc2b78db642a758f07826d0dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labels:
+  - Vehicle
+  useAutoLabeling: 0
+  autoLabelingSchemeType: 
 --- !u!1 &1532183532590448871
 GameObject:
   m_ObjectHideFlags: 0

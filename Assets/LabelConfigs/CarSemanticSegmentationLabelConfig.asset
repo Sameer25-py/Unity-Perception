@@ -13,12 +13,6 @@ MonoBehaviour:
   m_Name: CarSemanticSegmentationLabelConfig
   m_EditorClassIdentifier: 
   m_LabelEntries:
-  - label: RedCar
-    color: {r: 1, g: 0, b: 0, a: 1}
-  - label: BlueCar
-    color: {r: 0, g: 0, b: 1, a: 1}
-  - label: GrayCar
-    color: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-  - label: PurpleCar
-    color: {r: 0.7490196, g: 0.2509804, b: 0.7490196, a: 1}
+  - label: Vehicle
+    color: {r: 1, g: 0.23260736, b: 0, a: 1}
   skyColor: {r: 0, g: 0, b: 0, a: 1}
