@@ -26,6 +26,11 @@ namespace CustomRandomizations
             y = new UniformSampler(-1f, 1f),
             z = new ConstantSampler(2f)
         };
+        
+        /// <summary>
+        /// Sampler for random rotation
+        /// </summary>
+        public Vector3Parameter RotationDistribution;
         /// <summary>
         /// Gap b/w cars
         /// </summary>
@@ -75,10 +80,11 @@ namespace CustomRandomizations
                     for (int j = 0; j < Tries.Sample(); j++)
                     {   
                         var sampledPosition = positionDistribution.Sample();
+                        var sampledRotation = RotationDistribution.Sample();
                         var colliders = Physics.OverlapBox(sampledPosition, 
-                            col.bounds.extents + Vector3.one * Gap.Sample(),Quaternion.identity,SimulationLayerMask);
+                            col.bounds.extents + Vector3.one * Gap.Sample(),Quaternion.Euler(sampledRotation),SimulationLayerMask);
                         if (colliders.Length != 0) continue;
-                        var obj = Object.Instantiate(instance,sampledPosition, Quaternion.identity);
+                        var obj = Object.Instantiate(instance,sampledPosition, Quaternion.Euler(sampledRotation));
                         _iObjects.Add(obj);
                         break;
                     }
