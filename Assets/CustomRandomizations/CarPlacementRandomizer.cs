@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Perception.Randomization.Parameters;
 using UnityEngine.Perception.Randomization.Randomizers;
 using UnityEngine.Perception.Randomization.Samplers;
+using Object = UnityEngine.Object;
 
 namespace CustomRandomizations
 {
@@ -24,6 +26,8 @@ namespace CustomRandomizations
             y = new UniformSampler(-1f, 1f),
             z = new ConstantSampler(2f)
         };
+
+        public FloatParameter Gap;
         /// <summary>
         /// The sampler controlling the number of objects to place.
         /// </summary>
@@ -38,6 +42,9 @@ namespace CustomRandomizations
         GameObject m_Container;
         //This cache allows objects to be reused across placements
         UnityEngine.Perception.Randomization.Utilities.GameObjectOneWayCache m_GameObjectOneWayCache;
+        
+        public LayerMask SimulationLayerMask;
+        private List<GameObject> _iObjects = new() ;
 
         /// <inheritdoc/>
         protected override void OnAwake()
@@ -57,7 +64,20 @@ namespace CustomRandomizations
             for (int i = 0; i < count; i++)
             {
                 var instance = m_GameObjectOneWayCache.GetOrInstantiate(prefabs.Sample());
-                instance.transform.position = positionDistribution.Sample();
+                if (instance.TryGetComponent(out Collider col))
+                {
+                    for (int j = 0; j < 20; j++)
+                    {   
+                        var sampledPosition = positionDistribution.Sample();
+                        var colliders = Physics.OverlapBox(sampledPosition, 
+                            col.bounds.extents + Vector3.one * Gap.Sample(),Quaternion.identity,SimulationLayerMask);
+                        if (colliders.Length != 0) continue;
+                        var obj = Object.Instantiate(instance,sampledPosition, Quaternion.identity);
+                        _iObjects.Add(obj);
+                        break;
+                    }
+                }
+                
             }
         }
 
@@ -67,6 +87,9 @@ namespace CustomRandomizations
         protected override void OnIterationEnd()
         {
             m_GameObjectOneWayCache.ResetAllObjects();
+            _iObjects.ForEach(Object.Destroy);
+            _iObjects.Clear();
+            
         }
     }
 }
