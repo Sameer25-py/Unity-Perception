@@ -51,6 +51,7 @@ namespace CustomRandomizations
             }
 
             transform.position = cachedPosition;
+            transform.rotation = Quaternion.identity;
             _collider.enabled = true;
             return false;
         }
