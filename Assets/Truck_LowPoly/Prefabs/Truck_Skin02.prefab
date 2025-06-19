@@ -996,6 +996,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - Vehicle
+  - Truck
   useAutoLabeling: 0
   autoLabelingSchemeType: 

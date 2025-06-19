@@ -13,8 +13,20 @@ MonoBehaviour:
   m_Name: CarLabelConfig
   m_EditorClassIdentifier: 
   m_LabelEntries:
-  - label: Vehicle
+  - label: RedCar
     id: 1
+    hierarchyRelation: 0
+  - label: BlueCar
+    id: 2
+    hierarchyRelation: 0
+  - label: GrayCar
+    id: 3
+    hierarchyRelation: 0
+  - label: PurpleCar
+    id: 4
+    hierarchyRelation: 0
+  - label: Truck
+    id: 5
     hierarchyRelation: 0
   autoAssignIds: 1
   startingLabelId: 1

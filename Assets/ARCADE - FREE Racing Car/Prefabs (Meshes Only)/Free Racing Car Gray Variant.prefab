@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 382805527985322301, guid: c4cad50aa03bbca42938fe318344950b,
+        type: 3}
+      propertyPath: labels.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 382805527985322301, guid: c4cad50aa03bbca42938fe318344950b,
+        type: 3}
+      propertyPath: labels.Array.data[0]
+      value: GrayCar
+      objectReference: {fileID: 0}
     - target: {fileID: 391397315203931578, guid: c4cad50aa03bbca42938fe318344950b,
         type: 3}
       propertyPath: m_Layer

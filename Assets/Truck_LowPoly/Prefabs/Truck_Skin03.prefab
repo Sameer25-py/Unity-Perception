@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - Vehicle
+  - Truck
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!1 &5652376282014860881
