@@ -77,7 +77,6 @@ namespace CustomRandomizations
                 {
                     var sampledPosition = positionDistribution.Sample();
                     var sampledRotation = RotationDistribution.Sample();
-                    instance.transform.position = Vector3.right * 100000;
                     var vehicleTag = instance.GetComponent<VehicleRandomPlacementTag>();
                     bool isSuccess = vehicleTag.Place(sampledPosition, sampledRotation, Gap.Sample() * Vector3.one);
                     if(isSuccess)
